@@ -35,3 +35,4 @@ export const stylesForTodoComponent = {
 
 // Text Constants start here 
 export const placeHolderText = 'Enter todo here...'
+export const maxAmountOfTodos = 10

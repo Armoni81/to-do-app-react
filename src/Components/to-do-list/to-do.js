@@ -1,32 +1,35 @@
-import { React, useState } from 'react';
-import { stylesForTodoComponent, placeHolderText } from '../../Constants/consts';
+import { React, useEffect, useState,useMemo, useCallback} from 'react';
+import { stylesForTodoComponent, placeHolderText,maxAmountOfTodos } from '../../Constants/consts';
 import checkBox from '../../Images/check_5610944.png'
 import plusSign from  '../../Images/plus-sign_11607148.png'
 import trashCan from '../../Images/trash-can_7279437.png'
   
   const Todo = () =>  {
-    const [ input , setInput ]= useState('')
+    const [ input , setInput ] = useState('')
     const [ arrayOfTodos,setArrayOfTodos ] = useState([])
-    const [ disable, setDisable ] =useState(false)
+    const [ disable, setDisable ] = useState(false)
 
     const handleSubmitClick = () => {
-
-        if(arrayOfTodos[arrayOfTodos.length -1] === arrayOfTodos[arrayOfTodos.length -2]){
-            console.log(arrayOfTodos[arrayOfTodos.length],'equals',arrayOfTodos[arrayOfTodos.length -1])
-        }
         setArrayOfTodos([...arrayOfTodos, [input]]) // adds new input to arrayOftodos
-console.log(arrayOfTodos[arrayOfTodos.length], 'length')
+
         setDisable(true) // disables submit button
         document.getElementById('inputField').value= '' // clears input field once submit button is clicked back to placeholder text
-        // setArrayOfTodos([])
+
         setTimeout(() => {
             setDisable(false) // enables sumbit button after 3 seconds
         }, '3000');
     }
-    const removeTodo = (event) => {
-        console.log(event)
-    }
-    console.log(input,'here')
+
+    const removeTodo = useCallback((index) => {
+        setArrayOfTodos(prevArray => { // takes the value of arrayOfTodos
+          const newArray = [...prevArray]; //  uses spread opertor to take in any new values added 
+          if (index > -1) {
+            newArray.splice(index, 1); 
+          }
+          return newArray;
+        });
+      }, [arrayOfTodos]); //only runs if this is changed
+
 	return (
     <div  style={stylesForTodoComponent.boxHoldingToDos}> 
         <div style={stylesForTodoComponent.inputSectionStyling}>
@@ -37,7 +40,7 @@ console.log(arrayOfTodos[arrayOfTodos.length], 'length')
             {
                 arrayOfTodos.map((element, index) => ( // loops through arrayOfTodos and displays each element in that array
                     <div key={index} style={stylesForTodoComponent.renderedToDos}>
-                        <p>{element}</p><input type='image' onClick={removeTodo} style={{width:'40px'}} src={trashCan}></input>
+                        <p>{element}{index}</p><input type='image' onClick={() => removeTodo(index)} style={{width:'40px'}} src={trashCan}></input>
                     </div>
                 ))
             }
