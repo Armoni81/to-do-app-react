@@ -8,6 +8,7 @@ import trashCan from '../../Images/trash-can_7279437.png'
     const [ input , setInput ] = useState('')
     const [ arrayOfTodos,setArrayOfTodos ] = useState([])
     const [ disable, setDisable ] = useState(false)
+    const  [ isChecked,setIsChecked ] = useState(false)
 
     const handleSubmitClick = () => {
         setArrayOfTodos([...arrayOfTodos, [input]]) // adds new input to arrayOftodos
@@ -29,7 +30,13 @@ import trashCan from '../../Images/trash-can_7279437.png'
           return newArray;
         });
       }, [arrayOfTodos]); //only runs if this is changed
-
+const handleCheckBox = (event)=> {
+    if(event.target.checked){
+        setIsChecked(true) // BUG:updates all; checkboxes at once
+    }else{
+        setIsChecked(false)
+    }
+}
 	return (
     <div  style={stylesForTodoComponent.boxHoldingToDos}> 
         <div style={stylesForTodoComponent.inputSectionStyling}>
@@ -40,7 +47,9 @@ import trashCan from '../../Images/trash-can_7279437.png'
             {
                 arrayOfTodos.map((element, index) => ( // loops through arrayOfTodos and displays each element in that array
                     <div key={index} style={stylesForTodoComponent.renderedToDos}>
-                        <p>{element}</p><input type='image' onClick={() => removeTodo(index)} style={{width:'40px'}} src={trashCan}></input>
+                      <input type='checkbox' id='checkBox' onChange={() => handleCheckBox(event)}></input>  
+                      {isChecked ?<s style={{color: 'green'}}>{element}</s> : <p>{element}</p> }
+                      <input type='image' onClick={() => removeTodo(index)} style={{width:'40px'}} src={trashCan}></input>
                     </div>
                 ))
             }
