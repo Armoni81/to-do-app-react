@@ -40,7 +40,7 @@ import trashCan from '../../Images/trash-can_7279437.png'
             {
                 arrayOfTodos.map((element, index) => ( // loops through arrayOfTodos and displays each element in that array
                     <div key={index} style={stylesForTodoComponent.renderedToDos}>
-                        <p>{element}{index}</p><input type='image' onClick={() => removeTodo(index)} style={{width:'40px'}} src={trashCan}></input>
+                        <p>{element}</p><input type='image' onClick={() => removeTodo(index)} style={{width:'40px'}} src={trashCan}></input>
                     </div>
                 ))
             }
