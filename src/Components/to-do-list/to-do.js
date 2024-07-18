@@ -14,29 +14,45 @@ import trashCan from '../../Images/trash-can_7279437.png'
     const handleSubmitClick = () => {
         setArrayOfTodos([...arrayOfTodos, [input]]) // adds new input to arrayOftodos
 
-        setDisable(true) // disables submit button
+        //   setDisable(true) // disables submit button
         document.getElementById('inputField').value= '' // clears input field once submit button is clicked back to placeholder text
 
-        setTimeout(() => {
-            setDisable(false) // enables sumbit button after 3 seconds
-        }, '3000');
+        // setTimeout(() => {
+        //     setDisable(false) // enables sumbit button after 3 seconds
+        // }, '3000');
     }
 
-    const removeTodo = useCallback((index) => {
-        setArrayOfTodos(prevArray => { // takes the value of arrayOfTodos
-          const newArray = [...prevArray]; //  uses spread opertor to take in any new values added 
-          if (index > -1) {
-            newArray.splice(index, 1); 
-          }
-          return newArray;
-        });
-      }, [arrayOfTodos]); //only runs if this is changed
+   
 const handleCheckBox = (event,index)=> {
    setCheckedStatus({
-    ...checkedStatus,
+    checkedStatus,
     [index]: event.target.checked
    })
+//    console.log(checkedStatus, 'checkedStatus')
 }
+const removeTodo = useCallback((index,checkedStatus,event) => {
+    setArrayOfTodos(prevArray => { // takes the value of arrayOfTodos
+      const newArray = [...prevArray]; //  uses spread opertor to take in any new values added 
+      if (index > -1) {
+        newArray.splice(index, 1);
+        console.log(checkedStatus[index],index, 'here is index')
+        // if(checkedStatus[index] === true){
+        //   setCheckedStatus({...checkedStatus,
+        //     [index]: false,
+        //   })
+
+        // if i come through and click on element 1 and element 2 bother are true 
+        //i delete element 1 and element 2 drops and index 
+          let checkedTodo = document.getElementById(`checkBox${index}`)
+          checkedTodo.checked = false
+          console.log(document.getElementById(`checkBox${index}`))
+            console.log(checkedStatus[index], 'checledStatus[index] in the IF!')
+        // }
+        // if index that comes in is true from checkedStatus set it to false and take away 1 from count 
+      }
+      return newArray;
+    });
+  }, [arrayOfTodos]); //only runs if this is changed
 console.log(checkedStatus, 'checkedStatus')
 console.log(arrayOfTodos,'arrof toods')
 return (
@@ -53,9 +69,9 @@ return (
             {
                 arrayOfTodos.map((element, index) => ( // loops through arrayOfTodos and displays each element in that array
                     <div key={index} style={stylesForTodoComponent.renderedToDos}>
-                      <input type='checkbox' id='checkBox' onChange={() => handleCheckBox(event, index)}></input>  
+                      <input type='checkbox' id={`checkBox${index}`} onChange={() => handleCheckBox(event, index)}></input>  
                       {checkedStatus[index] ? <s>{element}</s> : <p>{element}</p> }
-                      <input type='image' onClick={() => removeTodo(index)} style={{width:'40px'}} src={trashCan}></input>
+                      <input type='image' onClick={() => removeTodo(index, checkedStatus, event)} style={{width:'40px'}} src={trashCan}></input>
                     </div>
                 ))
             }
