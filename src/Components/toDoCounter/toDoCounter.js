@@ -1,20 +1,22 @@
 import {React} from "react";
 
+//Child
+
 const ToDoCounter = ({ checkedStatus, arrayOfTodos }) => {
-console.log(checkedStatus, 'todocounter')
+
 const grabCompletedTasks = (checkedStatus)=> {
    let count = 0
-   const totalTasks = Object.values(checkedStatus).length
    Object.values(checkedStatus).map( task => {
     if(task === true){
         count++
     }
     if(task === false){
-        count -1
+        count--
     }
 })
 return count
 }
+
 const checkedTasks = grabCompletedTasks(checkedStatus)
 
     return(
