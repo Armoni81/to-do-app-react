@@ -2,26 +2,17 @@ import {React} from "react";
 
 //Child
 
-const ToDoCounter = ({ checkedStatus, arrayOfTodos }) => {
+const ToDoCounter = ({ checkedStatus }) => {
 
-const grabCompletedTasks = (checkedStatus)=> {
-   let count = 0
-   Object.values(checkedStatus).map( task => {
-    if(task === true){
-        count++
-    }
-    if(task === false){
-        count--
-    }
-})
-return count
-}
+    const checkedTodos =  checkedStatus.filter((todo) => {
 
-const checkedTasks = grabCompletedTasks(checkedStatus)
+        return todo.isChecked !== false // filters out each todo.isChecked if the value is not false include it in the returning arr 
+
+        })
 
     return(
         <div>
-            {checkedTasks +'/'+ arrayOfTodos.length}
+            {checkedTodos.length + '/' + checkedStatus.length}
         </div>
     );
 }

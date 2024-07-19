@@ -11,9 +11,9 @@ function App() {
     padding: 0,
     boxSizing: 'borderBox',
 }
+
   return (
    <div style={styles}>
-      <Header />
         <Todo />
    </div>
   );

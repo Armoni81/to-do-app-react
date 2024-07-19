@@ -1,4 +1,6 @@
 // Styles Start here
+
+//Styles for <Input /> 
 export const stylesForTodoComponent = {
     boxHoldingToDos : {
         margin: '100px',
@@ -13,9 +15,10 @@ export const stylesForTodoComponent = {
         backgroundColor: '#ece9e9',
         borderRadius: '20px',
         justifyContent: 'space-between',
-        padding: '10px'
+        padding: '10px',
+        margin: '10px'
     },
-    spaceBetweenTodos: {
+    spaceBetweenTodos: { 
         padding: '20px',
         display: 'flex',
         gap: '10px',
@@ -28,6 +31,18 @@ export const stylesForTodoComponent = {
     inputBoxStyling: {
         width: '70%',
         backgroundColor: '#e4dfdf'
+    },
+    todoStyling: {
+        display: 'flex',
+        flexFlow: 'column-reverse'
+    }
+    
+}
+//Styles for <Header />
+export const stylesForHeader = {
+    header: {
+        fontSize:'30px',
+        padding:'30px'
     }
 }
 
@@ -35,4 +50,4 @@ export const stylesForTodoComponent = {
 
 // Text Constants start here 
 export const placeHolderText = 'Enter todo here...'
-export const maxAmountOfTodos = 10
+export const header = 'To-Do'

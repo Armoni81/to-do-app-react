@@ -1,15 +1,12 @@
 import React from 'react';
+import { header, stylesForHeader } from '../../Constants/consts';
+
   
   const Header = () =>  {
-    const styles = {
-        headerSytles: {
-            fontSize:'30px',
-            padding:'30px'
-        }
-    }
+  
 	return (
-	  <div style={styles.headerSytles}>
-        To-do
+	  <div style={stylesForHeader.header}>
+        {header}
 	  </div>
 	);
   }
