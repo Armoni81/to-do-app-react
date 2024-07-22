@@ -42,7 +42,8 @@ export const stylesForTodoComponent = {
 export const stylesForHeader = {
     header: {
         fontSize:'30px',
-        padding:'30px'
+        padding:'30px',
+        color: '#4dff4d'
     }
 }
 

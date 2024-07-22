@@ -8,9 +8,10 @@ import Header from '../header/header';
 //Parent
 const Todo = () => {
 
-    const [input, setInput] = useState('');
+    const [input, setInput] = useState(null);
     const [disable, setDisable] = useState(false);
     const [checkedStatus, setCheckedStatus] = useState([]);
+    const [ loadNoToDo, setLoadNoToDo ] = useState(true)
 
     return (
         <div>
@@ -26,6 +27,8 @@ const Todo = () => {
                 setInput={setInput}
                 setCheckedStatus={setCheckedStatus}
                 checkedStatus={checkedStatus}
+                loadNoToDo={loadNoToDo}
+                setLoadNoToDo={setLoadNoToDo}
             />
         </div>
     </div>

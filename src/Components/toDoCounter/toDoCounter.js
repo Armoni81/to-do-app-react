@@ -11,8 +11,8 @@ const ToDoCounter = ({ checkedStatus }) => {
         })
 
     return(
-        <div>
-            {checkedTodos.length + '/' + checkedStatus.length}
+        <div id="counter" style={{  color: '#4dff4d', width: '100%'}}>
+          <p style={{backgroundColor: 'green', width: 'fit-content', border: '1px solid lime',borderRadius: '10px', padding:'20px'}}> {checkedTodos.length + '/' + checkedStatus.length}</p> 
         </div>
     );
 }
