@@ -13,24 +13,27 @@ import trashCan from '../../Images/trash-can_7279437.png'
 
 const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checkedStatus, loadNoToDo, setLoadNoToDo }) => {
 
-    const text = document.getElementById('inputField').value
-    // console.log(text, 'lol')
-    if(input > 3){
-        setDisable(true)
-        return null
-    }
     const handleSubmitClick = (event) => {
-        console.log('bro')
-
-
+        
+        if( input.split('').length < 4 ){
+    
+            setDisable(true)
+            setTimeout(()=> {
+             setDisable(false)
+            }, '3000')
+            return //stop running the function here if true 
+        
+        }else{
+            setDisable(false)
+        }
         setCheckedStatus([
             ...checkedStatus,
             {title: input, id: self.crypto.randomUUID(), isChecked: false}
         ]
         );
         
-        setDisable(true) // disables submit button
-     
+        // setDisable(true) // disables submit button
+        setInput('')
           document.getElementById('inputField').value= ''
        
 
@@ -55,8 +58,8 @@ const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checked
       };
 
       useEffect(() => {
-
           checkedStatus.length > 0 ? setLoadNoToDo(false) : setLoadNoToDo(true)
+
       }, [checkedStatus])
 
   return (
@@ -68,6 +71,7 @@ const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checked
                     onChange={e => setInput(e.target.value)} 
                     style={stylesForTodoComponent.inputBoxStyling} 
                     placeholder={placeHolderText} 
+                    disabled={disable}
                     required
                     type="text"
                 />
@@ -81,19 +85,20 @@ const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checked
                     disabled={disable}
                 />
             </div>
-        {/* <label>&nbsp;
-        <span>
-            <span class="alert" style={{color:'red'}}>Please use more the 3 characters</span>
-        </span></label> */}
-
             </div>
         </div>
         <div>
-            <p style={{color:'white'}}>Please use more than 4 characters</p>
+            {disable ?   (
+                <p style={{color:'red'}}>Please use more than 4 characters. You currently have {input.split('').length}.</p>
+
+            ): null
+
+            }
         </div>
-        {
-                loadNoToDo ? (<NoTodos /> ) :
-            
+            {loadNoToDo ? (<NoTodos /> 
+
+            ) :
+         
         <div style={stylesForTodoComponent.todoStyling}>
         {checkedStatus.map((element, index) => (
             <div key={element.id}  id={'to-do'} style={stylesForTodoComponent.renderedToDos}>

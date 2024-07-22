@@ -8,7 +8,7 @@ import Header from '../header/header';
 //Parent
 const Todo = () => {
 
-    const [input, setInput] = useState(null);
+    const [input, setInput] = useState('');
     const [disable, setDisable] = useState(false);
     const [checkedStatus, setCheckedStatus] = useState([]);
     const [ loadNoToDo, setLoadNoToDo ] = useState(true)
