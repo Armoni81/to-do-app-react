@@ -8,9 +8,25 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  #userInput {
+    animation: fadeInAnimation ease 3.8s, typing 3.5s steps(80, end);
+    animation-iteration-count: 1;
+    white-space: nowrap;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+  margin: 0 auto;
+  box-sizing: border-box; 
+  display: flex; 
+  justify-content: center;/* Gives that scrolling effect as the typing happens */
+  
+
   }
+}
+@media(prefers-reduced-motion: no-preference){
+#counter{
+  animation: moving 5s infinite; 
+  -webkit-animation: moving 5s infinite; 
+  position:relative;
+}
 }
 
 .App-header {
@@ -28,11 +44,37 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+
+@keyframes fadeInAnimation {
+  0% {
+      opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+      opacity: 1;
   }
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+
+@-webkit-keyframes moving {
+     from {left: 0px;}
+  to {right: 100px;}
+}
+
+input[type=text]
+{
+    color: #000000;
+    height: 28px;
+    padding-left: 10px;
+    text-decoration: none;
+    background-image: url('./Images/enter.png');
+    background-repeat: no-repeat;
+    background-size: 20px 26px;
+    border-radius: 5px; /*up to date browsers support this, but you can add prefixes if you want*/
+    padding-left: 25px;
+    border: 0;
 }

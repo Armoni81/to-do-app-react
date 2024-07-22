@@ -1,6 +1,8 @@
-import{ React,  useCallback} from "react";
+import{ React,  useCallback, useEffect} from "react";
 //imported Constants
-import { stylesForTodoComponent, placeHolderText } from '../../Constants/consts';
+import { stylesForTodoComponent, placeHolderText, minimumCharactersForInputField } from '../../Constants/consts';
+
+import NoTodos from "../renderNoTodos/noTodos";
 
 
 //photos
@@ -9,22 +11,33 @@ import trashCan from '../../Images/trash-can_7279437.png'
 
 
 
-const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checkedStatus }) => {
+const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checkedStatus, loadNoToDo, setLoadNoToDo }) => {
+
     const handleSubmitClick = (event) => {
+        if( input.split('').length < 4 ){
+    
+            setDisable(true)
+            setTimeout(()=> {
+             setDisable(false)
+            }, '3000')
+            return //stop running the function here
+        }
         setCheckedStatus([
             ...checkedStatus,
             {title: input, id: self.crypto.randomUUID(), isChecked: false}
         ]
         );
-    
-        setDisable(true) // disables submit button
+        
+        // setDisable(true) // disables submit button
+        setInput('')
           document.getElementById('inputField').value= ''
        
-    
+
         setTimeout(() => {
             setDisable(false) // enables sumbit button after 3 seconds
         }, '3000');
     }
+
     const handleCheckBox = (event) => {
         const { id, checked } = event.target; //grabs id and checked property from event.target 
         
@@ -37,40 +50,61 @@ const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checked
      const removeTodo = (index, title) => {
        const updatedItems = checkedStatus.filter((_, i) => i !== index) // i represents the index that filter is at. if index is not equal to the index thats getting deleted return those in a seperate array
         setCheckedStatus(updatedItems)
+        
       };
 
+      useEffect(() => {
+          checkedStatus.length > 0 ? setLoadNoToDo(false) : setLoadNoToDo(true)
+
+      }, [checkedStatus])
 
   return (
     <div>
-        <div style={stylesForTodoComponent.spaceBetweenTodos}>
-            <div style={stylesForTodoComponent.inputSectionStyling}>
-                <input 
-                    id='inputField' 
-                    onChange={e => setInput(e.target.value)} 
-                    style={stylesForTodoComponent.inputBoxStyling} 
-                    placeholder={placeHolderText} 
-                    minLength={3} 
-                    required={true}
-                />
-                <input 
-                    type='image'
-                    src={plusSign} 
-                    onClick={handleSubmitClick} 
-                    style={{ width: '30px', padding: '5px' }} 
-                    disabled={disable}
-                />
+         return (
+        <div>
+            <div style={stylesForTodoComponent.spaceBetweenTodos}>
+                <div style={stylesForTodoComponent.inputSectionStyling}>
+                    <div style={stylesForTodoComponent.inputWithButton}>
+                        <input 
+                            id='inputField' 
+                            onChange={e => setInput(e.target.value)} 
+                            style={stylesForTodoComponent.inputBoxStyling} 
+                            placeholder={placeHolderText} 
+                            disabled={disable}
+                            required
+                            type="text"
+                        />
+                        <input 
+                            type='image'
+                            src={plusSign} 
+                            onClick={handleSubmitClick} 
+                            style={stylesForTodoComponent.plusSignStyling} 
+                            disabled={disable}
+                        />
+                    </div>
+                    {disable && (
+                        <p style={stylesForTodoComponent.errorMessage}>{minimumCharactersForInputField}{input.split('').length}.</p>
+                    )}
+                </div>
             </div>
         </div>
+    );
+        <div>
+        </div>
+            {loadNoToDo ? (<NoTodos /> 
+
+            ) :
+         
         <div style={stylesForTodoComponent.todoStyling}>
         {checkedStatus.map((element, index) => (
-            <div key={element.id} style={stylesForTodoComponent.renderedToDos}>
+            <div key={element.id}  id={'to-do'} style={stylesForTodoComponent.renderedToDos}>
                 <input
-              
+                    
                     type='checkbox'
                     id={element.id}
                     onChange={handleCheckBox}
                 />
-                <p>{element.title}</p>
+                <p id={"userInput"}>{element.title}</p>
                 <input
                     type='image'
                     style={{ width: '40px' }}
@@ -82,6 +116,7 @@ const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checked
         </div>
         ))}
         </div>
+}
     </div>
 )
 }
