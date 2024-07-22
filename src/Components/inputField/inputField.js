@@ -1,6 +1,6 @@
 import{ React,  useCallback, useEffect} from "react";
 //imported Constants
-import { stylesForTodoComponent, placeHolderText } from '../../Constants/consts';
+import { stylesForTodoComponent, placeHolderText, minimumCharactersForInputField } from '../../Constants/consts';
 
 import NoTodos from "../renderNoTodos/noTodos";
 
@@ -14,17 +14,13 @@ import trashCan from '../../Images/trash-can_7279437.png'
 const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checkedStatus, loadNoToDo, setLoadNoToDo }) => {
 
     const handleSubmitClick = (event) => {
-        
         if( input.split('').length < 4 ){
     
             setDisable(true)
             setTimeout(()=> {
              setDisable(false)
             }, '3000')
-            return //stop running the function here if true 
-        
-        }else{
-            setDisable(false)
+            return //stop running the function here
         }
         setCheckedStatus([
             ...checkedStatus,
@@ -64,36 +60,36 @@ const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checked
 
   return (
     <div>
-        <div style={stylesForTodoComponent.spaceBetweenTodos}>
-            <div style={stylesForTodoComponent.inputSectionStyling}>
-                <input 
-                    id='inputField' 
-                    onChange={e => setInput(e.target.value)} 
-                    style={stylesForTodoComponent.inputBoxStyling} 
-                    placeholder={placeHolderText} 
-                    disabled={disable}
-                    required
-                    type="text"
-                />
-            <div>
-                
-                <input 
-                    type='image'
-                    src={plusSign} 
-                    onClick={handleSubmitClick} 
-                    style={{ width: '30px', paddingLeft: '5px' }} 
-                    disabled={disable}
-                />
-            </div>
+         return (
+        <div>
+            <div style={stylesForTodoComponent.spaceBetweenTodos}>
+                <div style={stylesForTodoComponent.inputSectionStyling}>
+                    <div style={stylesForTodoComponent.inputWithButton}>
+                        <input 
+                            id='inputField' 
+                            onChange={e => setInput(e.target.value)} 
+                            style={stylesForTodoComponent.inputBoxStyling} 
+                            placeholder={placeHolderText} 
+                            disabled={disable}
+                            required
+                            type="text"
+                        />
+                        <input 
+                            type='image'
+                            src={plusSign} 
+                            onClick={handleSubmitClick} 
+                            style={stylesForTodoComponent.plusSignStyling} 
+                            disabled={disable}
+                        />
+                    </div>
+                    {disable && (
+                        <p style={stylesForTodoComponent.errorMessage}>{minimumCharactersForInputField}{input.split('').length}.</p>
+                    )}
+                </div>
             </div>
         </div>
+    );
         <div>
-            {disable ?   (
-                <p style={{color:'red'}}>Please use more than 4 characters. You currently have {input.split('').length}.</p>
-
-            ): null
-
-            }
         </div>
             {loadNoToDo ? (<NoTodos /> 
 

@@ -67,13 +67,14 @@
 
 input[type=text]
 {
-    color: #93aa89;
+    color: #000000;
     height: 28px;
     padding-left: 10px;
     text-decoration: none;
-    background-image: url('https://i.sstatic.net/pbpVI.png');
-    background-repeat: repeat-x;
+    background-image: url('./Images/enter.png');
+    background-repeat: no-repeat;
+    background-size: 20px 26px;
     border-radius: 5px; /*up to date browsers support this, but you can add prefixes if you want*/
-
+    padding-left: 25px;
     border: 0;
 }
