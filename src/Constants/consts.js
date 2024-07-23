@@ -101,3 +101,4 @@ export const stylesForNoTodos = {
 export const placeHolderText = 'Enter todo here...'
 export const header = 'To-Do'
 export const minimumCharactersForInputField = 'Please use at least 4 characters. You currently have ' 
+export const noTodoContent = 'Well look at you, with nothing to do...'
