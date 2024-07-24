@@ -6,7 +6,7 @@ const ToDoCounter = ({ checkedStatus }) => {
 
     return (
         <div style={stylesForCounter.counterContainer}>
-            <p style={stylesForCounter.counterText}>
+            < p data-cy='counter'style={stylesForCounter.counterText}>
                 {checkedTodos.length}/{checkedStatus.length}
             </p>
         </div>

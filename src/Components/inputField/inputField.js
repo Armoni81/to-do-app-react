@@ -101,7 +101,7 @@ const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checked
         {checkedStatus.map((element, index) => (
             <div key={element.id}  id={'to-do'} style={stylesForTodoComponent.renderedToDos}>
                 <input
-                    
+                    data-cy={`checkbox${index}`} // adding index for cypress tests
                     type='checkbox'
                     id={element.id}
                     onChange={handleCheckBox}
@@ -111,7 +111,7 @@ const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checked
                     type='image'
                     style={{ width: '40px' }}
                     src={trashCan}
-                    data-cy='removeTodo'
+                    data-cy={`removeTodo${index}`} // adding index for cypress tests
                     alt="Remove"
                     onClick={() => removeTodo(index,element.title)}
                 />
