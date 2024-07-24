@@ -86,7 +86,7 @@ const Input = ({ setCheckedStatus, checkedStatus }) => {
                         />
                     </div>
                     {disable && (
-                        <p style={stylesForTodoComponent.errorMessage}>{errorText}.</p>
+                        <p data-cy='errorText' style={stylesForTodoComponent.errorMessage}>{errorText}.</p>
                     )}
                 </div>
             </div>
