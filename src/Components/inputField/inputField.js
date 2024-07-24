@@ -60,7 +60,7 @@ const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checked
 
   return (
     <div>
-         return (
+    
         <div>
             <div style={stylesForTodoComponent.spaceBetweenTodos}>
                 <div style={stylesForTodoComponent.inputSectionStyling}>
@@ -73,6 +73,7 @@ const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checked
                             disabled={disable}
                             required
                             type="text"
+                            data-cy="inputField"
                         />
                         <input 
                             type='image'
@@ -80,6 +81,7 @@ const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checked
                             onClick={handleSubmitClick} 
                             style={stylesForTodoComponent.plusSignStyling} 
                             disabled={disable}
+                            data-cy="sumbitButton"
                         />
                     </div>
                     {disable && (
@@ -88,7 +90,7 @@ const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checked
                 </div>
             </div>
         </div>
-    );
+
         <div>
         </div>
             {loadNoToDo ? (<NoTodos /> 
@@ -99,7 +101,7 @@ const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checked
         {checkedStatus.map((element, index) => (
             <div key={element.id}  id={'to-do'} style={stylesForTodoComponent.renderedToDos}>
                 <input
-                    
+                    data-cy={`checkbox${index}`} // adding index for cypress tests
                     type='checkbox'
                     id={element.id}
                     onChange={handleCheckBox}
@@ -109,6 +111,7 @@ const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checked
                     type='image'
                     style={{ width: '40px' }}
                     src={trashCan}
+                    data-cy={`removeTodo${index}`} // adding index for cypress tests
                     alt="Remove"
                     onClick={() => removeTodo(index,element.title)}
                 />
