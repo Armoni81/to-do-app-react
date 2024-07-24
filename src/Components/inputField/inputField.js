@@ -39,7 +39,6 @@ const Input = ({ setCheckedStatus, checkedStatus }) => {
         }, '3000');
     }
 
-
     const handleCheckBox = (event) => {
         const { id, checked } = event.target; //grabs id and checked property from event.target 
         
@@ -49,6 +48,7 @@ const Input = ({ setCheckedStatus, checkedStatus }) => {
         );
         setCheckedStatus(updatedItems);
       };
+
      const removeTodo = (index, title) => {
        const updatedItems = checkedStatus.filter((_, i) => i !== index) // i represents the index that filter is at. if index is not equal to the index thats getting deleted return those in a seperate array
         setCheckedStatus(updatedItems)
@@ -62,7 +62,6 @@ const Input = ({ setCheckedStatus, checkedStatus }) => {
 
   return (
     <div>
-    
         <div>
             <div style={stylesForTodoComponent.spaceBetweenTodos}>
                 <div style={stylesForTodoComponent.inputSectionStyling}>
@@ -92,13 +91,9 @@ const Input = ({ setCheckedStatus, checkedStatus }) => {
                 </div>
             </div>
         </div>
-
-        <div>
-        </div>
-            {loadNoToDo ? (<NoTodos /> 
-
-            ) :
-         
+        
+        {loadNoToDo ? (<NoTodos /> ) :
+            
         <div style={stylesForTodoComponent.todoStyling}>
         {checkedStatus.map((element, index) => (
             <div key={element.id}  id={'to-do'} style={stylesForTodoComponent.renderedToDos}>
@@ -117,13 +112,11 @@ const Input = ({ setCheckedStatus, checkedStatus }) => {
                     alt="Remove"
                     onClick={() => removeTodo(index,element.title)}
                 />
-
         </div>
         ))}
         </div>
-}
+            }
     </div>
-)
+    )   
 }
-
 export default Input

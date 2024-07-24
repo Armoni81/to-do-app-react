@@ -7,7 +7,6 @@ import Header from '../header/header';
 
 //Parent
 const Todo = () => {
-
     const [checkedStatus, setCheckedStatus] = useState([]);
     
     return (

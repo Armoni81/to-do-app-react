@@ -3,6 +3,7 @@ import React from "react";
 import { stylesForCounter } from "../../Constants/consts";
 
 const ToDoCounter = ({ checkedStatus }) => {
+
     const checkedTodos = checkedStatus.filter((todo) => todo.isChecked);
 
     return (
@@ -13,7 +14,5 @@ const ToDoCounter = ({ checkedStatus }) => {
         </div>
     );
 };
-
-
 
 export default ToDoCounter;
