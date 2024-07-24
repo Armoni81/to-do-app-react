@@ -1,22 +1,23 @@
-import{ React,  useCallback, useEffect} from "react";
+import{ React, useState, useEffect} from "react";
 //imported Constants
-import { stylesForTodoComponent, placeHolderText, minimumCharactersForInputField } from '../../Constants/consts';
-
+import { stylesForTodoComponent, placeHolderText, minimumCharactersForInputField, noSpecialCharacters, specialCharacterRegex } from '../../Constants/consts';
+//imported Component(s)
 import NoTodos from "../renderNoTodos/noTodos";
-
-
 //photos
 import plusSign from  '../../Images/plus-sign_11607148.png'
 import trashCan from '../../Images/trash-can_7279437.png'
 
-
-
-const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checkedStatus, loadNoToDo, setLoadNoToDo }) => {
+const Input = ({ setCheckedStatus, checkedStatus }) => {
+    const [ loadNoToDo, setLoadNoToDo ] = useState(true)
+    const [ errorText, setErrorText ] = useState('')
+    const [input, setInput] = useState('');
+    const [disable, setDisable] = useState(false);
 
     const handleSubmitClick = (event) => {
-        if( input.split('').length < 4 ){
-    
+        if( input.split('').length < 4 || !specialCharacterRegex.test(input) ){
             setDisable(true)
+            console.log(input.split('').length < 4)
+            !specialCharacterRegex.test(input) ? setErrorText(noSpecialCharacters) : setErrorText(minimumCharactersForInputField + input.split('').length) 
             setTimeout(()=> {
              setDisable(false)
             }, '3000')
@@ -37,6 +38,7 @@ const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checked
             setDisable(false) // enables sumbit button after 3 seconds
         }, '3000');
     }
+
 
     const handleCheckBox = (event) => {
         const { id, checked } = event.target; //grabs id and checked property from event.target 
@@ -85,7 +87,7 @@ const Input = ({ input, setInput, disable, setDisable, setCheckedStatus, checked
                         />
                     </div>
                     {disable && (
-                        <p style={stylesForTodoComponent.errorMessage}>{minimumCharactersForInputField}{input.split('').length}.</p>
+                        <p style={stylesForTodoComponent.errorMessage}>{errorText}.</p>
                     )}
                 </div>
             </div>

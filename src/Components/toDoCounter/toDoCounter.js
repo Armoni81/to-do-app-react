@@ -1,4 +1,5 @@
 import React from "react";
+//imported Constants
 import { stylesForCounter } from "../../Constants/consts";
 
 const ToDoCounter = ({ checkedStatus }) => {

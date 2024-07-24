@@ -101,4 +101,8 @@ export const stylesForNoTodos = {
 export const placeHolderText = 'Enter todo here...'
 export const header = 'To-Do'
 export const minimumCharactersForInputField = 'Please use at least 4 characters. You currently have ' 
+export const noSpecialCharacters = 'No special characters allowed eg( !@#$%*() )'
 export const noTodoContent = 'Well look at you, with nothing to do...'
+
+//Regex Constants 
+export const specialCharacterRegex = /^[a-zA-Z0-9 ]+$/

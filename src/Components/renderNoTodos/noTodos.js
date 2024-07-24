@@ -1,4 +1,5 @@
 import React from "react";
+//imported Constants
 import { stylesForNoTodos, noTodoContent } from "../../Constants/consts";
 
 const NoTodos = () => {
