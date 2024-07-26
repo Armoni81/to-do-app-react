@@ -2,7 +2,7 @@ import React from "react"
 import Todo from "../../src/Components/to-do-list/to-do"
 import App from "../../src/App"
 
-import { noTodoContent, minimumCharactersForInputField, header } from "../../src/Constants/consts"
+import { noTodoContent, minimumCharactersForInputField, header, specialCharacterRegex, noSpecialCharacters} from "../../src/Constants/consts"
 
 const appComponent = <App />
 
@@ -54,6 +54,24 @@ describe('Error Handling: Minimum Characters', () => {
     cy.contains('1234')
   })
   
+})
+
+describe('Error Handling: Special Characters', () => {
+  // beforeEach(() => {
+  //   cy.get('[data-cy=inputField]').click().type("&&)*")
+  //   cy.get('[data-cy=sumbitButton]').click()
+  // })
+  it('Displays specail character error ', () => {
+    cy.get('[data-cy=inputField]').click().type("&&)*")
+    cy.get('[data-cy=sumbitButton]').click()
+    cy.get('[data-cy=errorText]').should('contain', noSpecialCharacters)
+  })
+  it('Displays specail character error even if 4 or more characters are typed', () => {
+    cy.get('[data-cy=inputField]').click().type("Todos*")
+    cy.get('[data-cy=sumbitButton]').click()
+    cy.get('[data-cy=errorText]').should('contain', noSpecialCharacters)
+  })
+
 })
 
 describe('Checkboxes: Handling count', () => {
