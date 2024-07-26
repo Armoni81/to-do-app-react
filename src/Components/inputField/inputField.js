@@ -1,11 +1,14 @@
-import{ React, useState, useEffect} from "react";
+import{ useState, useEffect} from "react";
+import * as React from 'react'
 //imported Constants
 import { stylesForTodoComponent, placeHolderText, minimumCharactersForInputField, noSpecialCharacters, specialCharacterRegex } from '../../Constants/consts';
 //imported Component(s)
 import NoTodos from "../renderNoTodos/noTodos";
+
 //photos
 import plusSign from  '../../Images/plus-sign_11607148.png'
 import trashCan from '../../Images/trash-can_7279437.png'
+import RemoveAllTodo from "../allTodoFunctionality/removeAll";
 
 const Input = ({ setCheckedStatus, checkedStatus }) => {
     const [ loadNoToDo, setLoadNoToDo ] = useState(true)
@@ -92,30 +95,38 @@ const Input = ({ setCheckedStatus, checkedStatus }) => {
         </div>
         
         {loadNoToDo ? (<NoTodos /> ) :
-            
-        <div style={stylesForTodoComponent.todoStyling}>
-        {checkedStatus.map((element, index) => (
-            <div key={element.id}  id={'to-do'} style={stylesForTodoComponent.renderedToDos}>
-                <input
-                    data-cy={`checkbox${index}`} // adding index for cypress tests
-                    type='checkbox'
-                    id={element.id}
-                    onChange={handleCheckBox}
-                />
-                <p id={"userInput"}>{element.title}</p>
-                <input
-                    type='image'
-                    style={{ width: '40px' }}
-                    src={trashCan}
-                    data-cy={`removeTodo${index}`} // adding index for cypress tests
-                    alt="Remove"
-                    onClick={() => removeTodo(index,element.title)}
-                />
-        </div>
-        ))}
-        </div>
+            <React.Fragment>
+            <div>
+
+                  {checkedStatus.length ? (
+                      <div>
+                          <RemoveAllTodo setCheckedStatus={setCheckedStatus} checkedStatus={checkedStatus} />
+                      </div>
+
+                  ) : null}
+            </div><div style={stylesForTodoComponent.todoStyling}>
+                      {checkedStatus.map((element, index) => (
+                          <div key={element.id} id={'to-do'} style={stylesForTodoComponent.renderedToDos}>
+                              <input
+                                  data-cy={`checkbox${index}`} // adding index for cypress tests
+                                  type='checkbox'
+                                  id={element.id}
+                                  onChange={handleCheckBox} />
+                              <p id={"userInput"}>{element.title}</p>
+                              <input
+                                  type='image'
+                                  style={{ width: '40px' }}
+                                  src={trashCan}
+                                  data-cy={`removeTodo${index}`} // adding index for cypress tests
+                                  alt="Remove"
+                                  onClick={() => removeTodo(index, element.title)} />
+                          </div>
+                      ))}
+                  </div>
+            </React.Fragment>
             }
     </div>
     )   
 }
+
 export default Input
