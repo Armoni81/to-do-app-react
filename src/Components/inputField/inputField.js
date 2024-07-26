@@ -29,7 +29,6 @@ const Input = ({ setCheckedStatus, checkedStatus }) => {
         ]
         );
         
-        // setDisable(true) // disables submit button
         setInput('')
           document.getElementById('inputField').value= ''
        
