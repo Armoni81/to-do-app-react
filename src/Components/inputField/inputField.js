@@ -1,4 +1,5 @@
-import{ React, useState, useEffect} from "react";
+import{ useState, useEffect} from "react";
+import * as React from 'react'
 //imported Constants
 import { stylesForTodoComponent, placeHolderText, minimumCharactersForInputField, noSpecialCharacters, specialCharacterRegex } from '../../Constants/consts';
 //imported Component(s)
@@ -94,7 +95,8 @@ const Input = ({ setCheckedStatus, checkedStatus }) => {
         </div>
         
         {loadNoToDo ? (<NoTodos /> ) :
-            <><div>
+            <React.Fragment>
+            <div>
 
                   {checkedStatus.length ? (
                       <div>
@@ -102,7 +104,7 @@ const Input = ({ setCheckedStatus, checkedStatus }) => {
                       </div>
 
                   ) : null}
-              </div><div style={stylesForTodoComponent.todoStyling}>
+            </div><div style={stylesForTodoComponent.todoStyling}>
                       {checkedStatus.map((element, index) => (
                           <div key={element.id} id={'to-do'} style={stylesForTodoComponent.renderedToDos}>
                               <input
@@ -120,9 +122,11 @@ const Input = ({ setCheckedStatus, checkedStatus }) => {
                                   onClick={() => removeTodo(index, element.title)} />
                           </div>
                       ))}
-                  </div></>
+                  </div>
+            </React.Fragment>
             }
     </div>
     )   
 }
+
 export default Input
