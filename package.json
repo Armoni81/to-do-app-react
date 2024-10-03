@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "react": "^15.3.1",
-  "homepage": "https://Armoni81.github.io/to-do-react-app",
+  "homepage": "https://armoni81.github.io/to-do-app-react",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
