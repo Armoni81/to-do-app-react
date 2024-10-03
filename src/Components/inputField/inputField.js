@@ -28,7 +28,7 @@ const Input = ({ setCheckedStatus, checkedStatus }) => {
         }
         setCheckedStatus([
             ...checkedStatus,
-            {title: input, id: self.crypto.randomUUID(), isChecked: false}
+            {title: input, id: window.crypto.randomUUID(), isChecked: false}
         ]
         );
         
