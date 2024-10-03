@@ -9,6 +9,7 @@ import NoTodos from "../renderNoTodos/noTodos";
 import plusSign from  '../../Images/plus-sign_11607148.png'
 import trashCan from '../../Images/trash-can_7279437.png'
 import RemoveAllTodo from "../allTodoFunctionality/removeAll";
+import CheckAll from "../allTodoFunctionality/checkAll";
 
 const Input = ({ setCheckedStatus, checkedStatus }) => {
     const [ loadNoToDo, setLoadNoToDo ] = useState(true)
@@ -19,7 +20,6 @@ const Input = ({ setCheckedStatus, checkedStatus }) => {
     const handleSubmitClick = (event) => {
         if( input.split('').length < 4 || !specialCharacterRegex.test(input) ){
             setDisable(true)
-            console.log(input.split('').length < 4)
             !specialCharacterRegex.test(input) ? setErrorText(noSpecialCharacters) : setErrorText(minimumCharactersForInputField + input.split('').length) 
             setTimeout(()=> {
              setDisable(false)
@@ -96,14 +96,7 @@ const Input = ({ setCheckedStatus, checkedStatus }) => {
         
         {loadNoToDo ? (<NoTodos /> ) :
             <React.Fragment>
-            <div>
-
-                  {checkedStatus.length ? (
-                      <div>
-                          <RemoveAllTodo setCheckedStatus={setCheckedStatus} checkedStatus={checkedStatus} />
-                      </div>
-
-                  ) : null}
+            <div style={{display: 'flex', justifyContent: "space-between"}}>
             </div><div style={stylesForTodoComponent.todoStyling}>
                       {checkedStatus.map((element, index) => (
                           <div key={element.id} id={'to-do'} style={stylesForTodoComponent.renderedToDos}>
