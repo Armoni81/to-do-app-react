@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "react": "^15.3.1",
+  "homepage": "https://armoni81.github.io/to-do-app-react",
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.3.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -17,8 +21,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cy": "cypress open"
-    },
+    "cy": "cypress open",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -38,6 +44,7 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^13.13.1"
+    "cypress": "^13.13.1",
+    "gh-pages": "^6.1.1"
   }
 }

@@ -4,12 +4,10 @@ import * as React from 'react'
 import { stylesForTodoComponent, placeHolderText, minimumCharactersForInputField, noSpecialCharacters, specialCharacterRegex } from '../../Constants/consts';
 //imported Component(s)
 import NoTodos from "../renderNoTodos/noTodos";
-
 //photos
 import plusSign from  '../../Images/plus-sign_11607148.png'
 import trashCan from '../../Images/trash-can_7279437.png'
-import RemoveAllTodo from "../allTodoFunctionality/removeAll";
-import CheckAll from "../allTodoFunctionality/checkAll";
+import Checkbox from '@mui/material/Checkbox';
 
 const Input = ({ setCheckedStatus, checkedStatus }) => {
     const [ loadNoToDo, setLoadNoToDo ] = useState(true)
@@ -28,13 +26,12 @@ const Input = ({ setCheckedStatus, checkedStatus }) => {
         }
         setCheckedStatus([
             ...checkedStatus,
-            {title: input, id: self.crypto.randomUUID(), isChecked: false}
+            {title: input, id: window.crypto.randomUUID(), isChecked: false}
         ]
         );
         
         setInput('')
           document.getElementById('inputField').value= ''
-       
 
         setTimeout(() => {
             setDisable(false) // enables sumbit button after 3 seconds
@@ -100,7 +97,7 @@ const Input = ({ setCheckedStatus, checkedStatus }) => {
             </div><div style={stylesForTodoComponent.todoStyling}>
                       {checkedStatus.map((element, index) => (
                           <div key={element.id} id={'to-do'} style={stylesForTodoComponent.renderedToDos}>
-                              <input
+                              <Checkbox
                                   data-cy={`checkbox${index}`} // adding index for cypress tests
                                   type='checkbox'
                                   id={element.id}
