@@ -3,7 +3,7 @@
 //Styles for <Input /> 
 export const stylesForTodoComponent = {
     boxHoldingToDos : {
-        margin: '100px',
+        margin: '73px',
         display: 'flex',
         flexDirection: 'column',
     },
